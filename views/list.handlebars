@@ -1,0 +1,72 @@
+
+{{#each list_time}}
+    <div style="margin-bottom: 15px">
+        <span>{{this}}</span>
+        <button
+            onClick="getcsv('{{this}}')"
+        >Tải về csv</button>
+    </div>
+{{/each}}
+
+<button
+    onClick="get_lastest()"
+>Tải dữ liệu mới nhất</button>
+
+
+<script>
+   var title = `Ma sp; Ten SP; Gia; Gia Vip 2; Gia Vip 3; Gia Vip 4; Gia Vip 5; Gia Vip 6\n`
+
+function downloadObjectAsJson(csvdata, exportName){
+    console.log("run download")
+    var dataStr = "data:text/plain;charset=utf-8," + title + csvdata;
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".csv");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+
+
+function getcsv(time){
+    var result = ""
+    
+    fetch('/get?time=' + time, {
+        method: 'get',
+        })
+        .then(function(res){
+            return res.json()
+        })
+        .then(function(json) {
+            json.forEach(function(data){
+                 let name = data.title.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'").replace(/&#215;/g, "×");
+                 result += `${data.ma_sp}; ${name}; ${data.price}; ${data.price_vip2}; ${data.price_vip3}; ${data.price_vip4}; ${data.price_vip5}; ${data.price_vip6}\n`
+            })
+            downloadObjectAsJson(result, "thuochapu")
+        }).catch(function(error){
+            alert("Co loi!!")
+        })
+}
+
+
+function get_lastest(time){
+    var result = ""
+    
+    fetch('/lastest', {
+        method: 'get',
+        })
+        .then(function(res){
+            return res.json()
+        })
+        .then(function(json) {
+            json.forEach(function(data){
+                 let name = data.title.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&#8211;/g, "-").replace(/&#8217;/g, "'").replace(/&#215;/g, "×");
+                 result += `${data.ma_sp}; ${name}; ${data.price}; ${data.price_vip2}; ${data.price_vip3}; ${data.price_vip4}; ${data.price_vip5}; ${data.price_vip6}\n`
+            })
+            downloadObjectAsJson(result, "thuochapu")
+        }).catch(function(error){
+            alert("Co loi!!")
+        })
+}
+
+</script>
