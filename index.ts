@@ -68,7 +68,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
-const port = 40000;
+const port = 50001;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/miniapp';
 
 const UrlSchema = new mongoose.Schema({
