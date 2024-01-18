@@ -112,7 +112,7 @@ app.get('/', async (req: Request, res: Response) => {
 app.get("/category", async (req: Request, res: Response) => {
   await setTimeout(() => {
     res.json(category)
-  }, 500);
+  }, 0);
 });
 
 app.get("/appInfo", async (req: Request, res: Response) => {
@@ -137,7 +137,7 @@ app.get("/appInfo", async (req: Request, res: Response) => {
         "/slices/3.jpeg",
       ]
     })
-  }, 2000)
+  }, 0)
 
 })
 
