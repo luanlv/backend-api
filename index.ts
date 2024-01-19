@@ -248,7 +248,7 @@ const category = [
     ]
   },
   {
-    "title": "Liệu pháp tế bào gốc - Exosome",
+    "title": "Tế bào gốc - Exosome",
     "cover": "/dichvu/exosome.png",
     "dichvu": [
       {
