@@ -170,7 +170,7 @@ app.get("/appInfo", async (req: Request, res: Response) => {
         },
       ]
     })
-  }, 1000)
+  }, 500)
 
 })
 
